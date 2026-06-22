@@ -41,7 +41,7 @@ function About:Draw()
         { "Wago.io:", "wago.io/gUI" },
         { "CurseForge:", "curseforge.com/wow/addons/gUI" },
         { "WoWInterface:", "wowinterface.com/downloads/infoXXXX" },
-        { "GitHub:", "github.com/Estasleyendoesto/gUI" }
+        { "GitHub:", "github.com/Estasleyendoesto/GhostUI" }
     }
     
     for _, l in ipairs(links) do 

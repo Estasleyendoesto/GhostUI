@@ -9,8 +9,6 @@ Wrapper.__index = Wrapper
 
 function Wrapper:UpdateConfig(frameConfig, globalConfig)
     self.config, self.globals = frameConfig, globalConfig
-    -- Eliminamos el 'true' para que los cambios de configuración 
-    -- se apliquen con una transición suave.
     self:Refresh()
 end
 

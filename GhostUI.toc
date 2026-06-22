@@ -1,8 +1,8 @@
-## Interface: 120000
-## Title: |cff00ccffgUI|r - GhostUI
+## Interface: 120007
+## Title: |cff00ccffGhostUI
 ## Notes: The best UI is the one that isn't there.
 ## Author: EEsto
-## Version: 1.1.0
+## Version: 1.1.01
 
 ## IconTexture: Interface\AddOns\GhostUI\icon
 
