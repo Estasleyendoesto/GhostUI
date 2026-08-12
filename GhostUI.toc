@@ -2,7 +2,7 @@
 ## Title: |cff00ccffGhostUI
 ## Notes: The best UI is the one that isn't there.
 ## Author: EEsto
-## Version: 1.1.01
+## Version: 1.1.02
 
 ## IconTexture: Interface\AddOns\GhostUI\icon
 
