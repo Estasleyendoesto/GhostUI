@@ -57,7 +57,7 @@ function Wrapper:OnUpdate()
     if not self.frame or not self.config or self.config.ignoreFrame then return end
 
     -- Sincronización de Mouseover
-    local isOver = MouseIsOver(self.frame)
+    local isOver = self.frame:IsMouseOver()
     if isOver ~= self.isMouseOver then
         self.isMouseOver = isOver
         self:Refresh()

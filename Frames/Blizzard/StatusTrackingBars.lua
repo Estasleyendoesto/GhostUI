@@ -18,7 +18,7 @@ function ns.StatusTrackingBars:Create(name, isVirtual)
 
         -- 1. Sincronización de Mouseover
         -- Usamos un bypass temporal de forceAlpha para permitir que GhostUI haga un fade suave
-        local isOver = MouseIsOver(self.frame)
+        local isOver = self.frame:IsMouseOver()
         if isOver ~= self.isMouseOver then
             self.isMouseOver = isOver
             

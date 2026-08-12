@@ -1,4 +1,4 @@
-## Interface: 120007
+## Interface: 120100
 ## Title: |cff00ccffGhostUI
 ## Notes: The best UI is the one that isn't there.
 ## Author: EEsto
