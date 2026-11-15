@@ -25,7 +25,7 @@ function About:Draw()
     local container = MainFrame.Content
 
     -- 2. Branding y Versión
-    Text:CreateHeadLine(container, "GhostUI", "gUI - 1.1.0")
+    Text:CreateHeadLine(container, "GhostUI", "gUI - 1.2.0")
 
     -- 3. Autoría (Configuración centrada)
     local authCfg = { centered = true, suffix = "", spacing = 10, xOffset = -18 }

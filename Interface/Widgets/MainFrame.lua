@@ -7,7 +7,7 @@ local CFG = {
     WIDTH  = 620,
     HEIGHT = 620,
     TITLE  = "GhostUI",
-    ALPHA  = 0.02,
+    ALPHA  = 0.3,
     TOP_OFFSET = -25,
     BORDER_COLOR = {0.5, 0.5, 0.5, 0.95}
 }
