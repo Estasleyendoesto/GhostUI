@@ -19,10 +19,14 @@ ns.UI_SCHEMA = {
         "mouseoverFadeInDuration",
         "mouseoverFadeOutDuration",
         { isSection = true,  label = "Events & Conditions" },
+        "deadGroup",
         "combatGroup",
+        "targetGroup",
         "afkGroup",
+        "stealthGroup",
         "mountGroup",
         "instanceGroup",
+        "restingGroup",
         { isSection = true,  label = "Additional Options" },
         "combatEndDelay"
     },
@@ -63,6 +67,14 @@ ns.UI_SCHEMA = {
             tooltip = "Controls how quickly frames fade out after the mouse leaves." 
         },
         -- CheckboxSliders para eventos globales
+        deadGroup = {
+            type = "checkboxslider",
+            label = "RIP",
+            cbKey = "useDEAD",
+            sliderKey = "DEADAlpha",
+            min = 0, max = 1, step = 0.05, unit = "%",
+            tooltip = "Controls frame opacity while dead or in ghost form."
+        },
         combatGroup = {
             type = "checkboxslider",
             label = "In Combat",
@@ -71,13 +83,29 @@ ns.UI_SCHEMA = {
             min = 0, max = 1, step = 0.05, unit = "%",
             tooltip = "Adjusts frame opacity while your character is in combat."
         },
+        targetGroup = {
+            type = "checkboxslider",
+            label = "With Target",
+            cbKey = "useTARGET",
+            sliderKey = "TARGETAlpha",
+            min = 0, max = 1, step = 0.05, unit = "%",
+            tooltip = "Adjusts frame opacity while you have a target selected."
+        },
         afkGroup = {
             type = "checkboxslider",
-            label = "When AFK",
+            label = "AFK",
             cbKey = "useAFK",
             sliderKey = "AFKAlpha",
             min = 0, max = 1, step = 0.05, unit = "%",
             tooltip = "Controls frame opacity when your character is marked as AFK."
+        },
+        stealthGroup = {
+            type = "checkboxslider",
+            label = "In Stealth",
+            cbKey = "useSTEALTH",
+            sliderKey = "STEALTHAlpha",
+            min = 0, max = 1, step = 0.05, unit = "%",
+            tooltip = "Changes frame opacity while your character is stealthed."
         },
         mountGroup = {
             type = "checkboxslider",
@@ -94,6 +122,14 @@ ns.UI_SCHEMA = {
             sliderKey = "INSTANCEAlpha",
             min = 0, max = 1, step = 0.05, unit = "%",
             tooltip = "Adjusts frame opacity inside dungeons, raids, or other instances."
+        },
+        restingGroup = {
+            type = "checkboxslider",
+            label = "Resting",
+            cbKey = "useRESTING",
+            sliderKey = "RESTINGAlpha",
+            min = 0, max = 1, step = 0.05, unit = "%",
+            tooltip = "Adjusts frame opacity while resting in a city or inn."
         },
         combatEndDelay = { 
             type = "slider", 
@@ -117,10 +153,14 @@ ns.UI_SCHEMA = {
         "mouseoverFadeInDuration",
         "mouseoverFadeOutDuration",
         { isSection = true, label = "Events & Conditions" },
+        "deadGroup",
         "combatGroup",
+        "targetGroup",
         "afkGroup",
+        "stealthGroup",
         "mountGroup",
-        "instanceGroup"
+        "instanceGroup",
+        "restingGroup"
     },
     frames = {
         -- General
@@ -159,6 +199,14 @@ ns.UI_SCHEMA = {
             tooltip = "Controls how quickly the frame fades out after the mouse leaves." 
         },
         -- Events and States
+        deadGroup = {
+            type = "checkboxslider",
+            label = "RIP",
+            cbKey = "useDEAD",
+            sliderKey = "DEADAlpha",
+            min = 0, max = 1, step = 0.05, unit = "%",
+            tooltip = "Controls frame opacity while dead or in ghost form."
+        },
         combatGroup = {
             type = "checkboxslider",
             label = "In Combat",
@@ -167,13 +215,29 @@ ns.UI_SCHEMA = {
             min = 0, max = 1, step = 0.05, unit = "%",
             tooltip = "Adjusts the frame`s visibility while your character is in combat."
         },
+        targetGroup = {
+            type = "checkboxslider",
+            label = "With Target",
+            cbKey = "useTARGET",
+            sliderKey = "TARGETAlpha",
+            min = 0, max = 1, step = 0.05, unit = "%",
+            tooltip = "Adjusts the frame`s visibility while you have a target selected."
+        },
         afkGroup = {
             type = "checkboxslider",
-            label = "When AFK",
+            label = "AFK",
             cbKey = "useAFK",
             sliderKey = "AFKAlpha",
             min = 0, max = 1, step = 0.05, unit = "%",
             tooltip = "Controls the frame`s visibility when your character is marked as AFK."
+        },
+        stealthGroup = {
+            type = "checkboxslider",
+            label = "In Stealth",
+            cbKey = "useSTEALTH",
+            sliderKey = "STEALTHAlpha",
+            min = 0, max = 1, step = 0.05, unit = "%",
+            tooltip = "Changes the frame`s visibility while your character is stealthed."
         },
         mountGroup = {
             type = "checkboxslider",
@@ -190,6 +254,14 @@ ns.UI_SCHEMA = {
             sliderKey = "INSTANCEAlpha",
             min = 0, max = 1, step = 0.05, unit = "%",
             tooltip = "Adjusts the frame`s visibility when inside dungeons, raids, or other instances."
+        },
+        restingGroup = {
+            type = "checkboxslider",
+            label = "Resting",
+            cbKey = "useRESTING",
+            sliderKey = "RESTINGAlpha",
+            min = 0, max = 1, step = 0.05, unit = "%",
+            tooltip = "Adjusts the frame`s visibility while resting in a city or inn."
         },
     }
 }

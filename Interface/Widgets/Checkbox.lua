@@ -73,6 +73,7 @@ function Checkbox:Create(parent, label, onUpdate, tooltip, default)
     frame.Checkbox = cb
     
     function frame:SetEnabled(enabled)
+        enabled = not not enabled
         self:SetAlpha(enabled and 1 or 0.4)
         self.Checkbox:SetEnabled(enabled)
         self:EnableMouse(enabled)

@@ -62,13 +62,14 @@ function CheckboxSlider:Create(parent, label, onUpdate, tooltip, settings)
     BindComboEvents(cb, slider, onUpdate)
 
     -- Estado inicial: el slider nace según esté el checkbox
-    slider:SetEnabled(settings.cbDefault)
+    slider:SetEnabled(not not settings.cbDefault)
 
     -- API Pública
     root.Checkbox = cb
     root.Slider   = slider
 
     function root:SetEnabled(enabled)
+        enabled = not not enabled
         self:SetAlpha(enabled and 1 or 0.4)
         self.Checkbox:SetEnabled(enabled)
 

@@ -2,7 +2,16 @@ local _, ns = ...
 local Events = gUI:NewModule("Events", "AceTimer-3.0", "AceEvent-3.0")
 Events:SetDefaultModuleState(false)
 
-local DETECTORS = { "AFKDetector", "CombatDetector", "MountDetector", "InstanceDetector" }
+local DETECTORS = {
+    "DeadDetector",
+    "CombatDetector",
+    "TargetDetector",
+    "AFKDetector",
+    "StealthDetector",
+    "MountDetector",
+    "InstanceDetector",
+    "RestingDetector",
+}
 local DELAY_CONFIG = { COMBAT = "combatEndDelay" }
 
 function Events:OnEnable()

@@ -52,6 +52,19 @@ function Database:SyncProfile()
     else
         self.db:SetProfile(DEFAULT_PROFILE)
     end
+
+    self:EnsureFrameDefaults()
+end
+
+--- Rellena claves nuevas de DEFAULT_FRAME_SETTINGS en frames ya guardados (p. ej. "other")
+function Database:EnsureFrameDefaults()
+    for _, data in pairs(self:GetFrames()) do
+        for k, v in pairs(ns.DEFAULT_FRAME_SETTINGS) do
+            if data[k] == nil then
+                data[k] = self:Deepcopy(v)
+            end
+        end
+    end
 end
 
 --- Activa/Desactiva el uso de perfil por personaje y clona si es necesario

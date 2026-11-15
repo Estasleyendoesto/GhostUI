@@ -20,10 +20,14 @@ ns.ACTION = {
 }
 
 ns.PRIORITIES = {
+    DEAD     = 110,
     COMBAT   = 100,
-    INSTANCE = 80,
+    TARGET   = 90,
     AFK      = 50,
+    STEALTH  = 30,
     MOUNT    = 10,
+    INSTANCE = 5,
+    RESTING  = 5,
 }
 
 ns.UI_EXTENSIONS = {
@@ -80,15 +84,23 @@ ns.DEFAULT_FRAME_SETTINGS = {
     mouseoverFadeOutDuration = 0.4,
     --Alpha amount
     frameAlpha = 0.5,
+    DEADAlpha     = 0,
     COMBATAlpha   = 1,
+    TARGETAlpha   = 1,
     AFKAlpha      = 0,
+    STEALTHAlpha  = 0.5,
     MOUNTAlpha    = 0,
     INSTANCEAlpha = 1,
+    RESTINGAlpha  = 0,
     --Events
+    useDEAD     = true,
     useCOMBAT   = true,
+    useTARGET   = false,
     useAFK      = true,
+    useSTEALTH  = false,
     useMOUNT    = true,
     useINSTANCE = true,
+    useRESTING  = true,
     --Group of frames as one
     isVirtual = false,
 }
@@ -101,15 +113,23 @@ ns.DEFAULT_GLOBAL_SETTINGS = {
     mouseoverFadeOutDuration = 0.4,
     --Alpha amount
     globalAlpha = 0.5,
+    DEADAlpha     = 0,
     COMBATAlpha   = 1,
+    TARGETAlpha   = 1,
     AFKAlpha      = 0,
+    STEALTHAlpha  = 0.5,
     MOUNTAlpha    = 0,
     INSTANCEAlpha = 1,
+    RESTINGAlpha  = 0,
     --Events
+    useDEAD     = true,
     useCOMBAT   = true,
+    useTARGET   = false,
     useAFK      = true,
+    useSTEALTH  = false,
     useMOUNT    = true,
     useINSTANCE = true,
+    useRESTING  = true,
     -- Combat
     combatEndDelay = 1,
     -- Minimap button angle

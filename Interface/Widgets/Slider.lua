@@ -106,6 +106,7 @@ function Slider:Create(parent, label, onUpdate, tooltip, settings)
 
     -- API Pública de control
     function frame:SetEnabled(enabled)
+        enabled = not not enabled
         self:SetAlpha(enabled and 1 or 0.4)
         self.Widget:SetEnabled(enabled)
         self.Back:SetEnabled(enabled)

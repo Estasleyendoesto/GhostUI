@@ -56,8 +56,12 @@ Frames\Wrapper.lua
 Events\Events.lua
 Events\Detectors\AFK.lua
 Events\Detectors\Combat.lua
+Events\Detectors\Dead.lua
 Events\Detectors\Instance.lua
 Events\Detectors\Mount.lua
+Events\Detectors\Resting.lua
+Events\Detectors\Stealth.lua
+Events\Detectors\Target.lua
 
 ## Execution
 Frames\Manager.lua
