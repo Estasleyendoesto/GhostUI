@@ -73,7 +73,7 @@ end
 
 function Commands:PrintHelp()
     print("|cff00ff00GhostUI Commands:|r")
-    print(" - |cffffff00/gui|r : Configuración")
-    print(" - |cffffff00/gui status|r : Diagnóstico")
-    print(" - |cffffff00/gui on/off|r : Activar/Desactivar")
+    print(" - |cffffff00/gui|r : Settings")
+    print(" - |cffffff00/gui status|r : Diagnostic report")
+    print(" - |cffffff00/gui on/off|r : Enable/Disable")
 end

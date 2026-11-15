@@ -30,7 +30,7 @@ function About:Draw()
     -- 3. Autoría (Configuración centrada)
     local authCfg = { centered = true, suffix = "", spacing = 10, xOffset = -18 }
     Text:CreateDoubleLine(container, "Author", "EEsto", authCfg)
-    Text:CreateDoubleLine(container, "Reign", "Sanguino (EU)", authCfg)
+    Text:CreateDoubleLine(container, "Realm", "Sanguino (EU)", authCfg)
 
     -- Espaciador manual
     local spacer = CreateFrame("Frame", nil, container)
