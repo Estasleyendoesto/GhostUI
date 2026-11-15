@@ -51,6 +51,7 @@ ns.FRAME_REGISTRY = {
     {name = "MinimapCluster",                      alias = "Minimap"},
     {name = "ObjectiveTrackerFrame",               alias = "Quests"},
     {name = "BuffFrame",                           alias = "Buffs"},
+    {name = "DebuffFrame",                         alias = "Debuffs"},
     {name = "MicroMenuContainer",                  alias = "Menu"},
     {name = "BagsBar",                             alias = "Bags"},
     {name = "BattlefieldMapFrame",                 alias = "Zone Map"},
