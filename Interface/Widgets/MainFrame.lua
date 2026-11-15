@@ -90,6 +90,8 @@ function MainFrame:CreateTopPanel()
         padding = {top = 3, bottom = 5, left = 28, right = 28}, 
         spacing = 10 
     })
+
+    self:CreateNavBar()
 end
 
 function MainFrame:CreateNavBar()
@@ -124,6 +126,18 @@ function MainFrame:CreateContentScroll()
     
     self.ScrollFrame = scroll
     self.Content = content
+    self.pages = {}
+end
+
+function MainFrame:GetOrCreatePage(panelName)
+    local page = self.pages[panelName]
+    if not page then
+        local content = CreateFrame("Frame", nil, self.ScrollFrame)
+        content:SetSize(self.ScrollFrame:GetWidth(), 1)
+        page = { content = content, header = nil, drawn = false }
+        self.pages[panelName] = page
+    end
+    return page
 end
 
 ---------------------------------------------------------------------
@@ -136,8 +150,36 @@ end
 
 function MainFrame:OpenPanel(panelName)
     self.currentPanel = panelName
-    self:ClearAll()
-    self:SendMessage("GHOSTUI_PANEL_CHANGED", panelName)
+    self.pages = self.pages or {}
+
+    local Navbar = gUI:GetModule("Navbar")
+    if self.nav and self.nav.buttonsByName then
+        Navbar:SetActiveButton(self.nav, self.nav.buttonsByName[panelName])
+    end
+
+    for name, p in pairs(self.pages) do
+        local isCurrent = (name == panelName)
+        p.content:SetShown(isCurrent)
+        if p.header then p.header:SetShown(isCurrent) end
+    end
+
+    local page = self:GetOrCreatePage(panelName)
+    page.content:SetWidth(self.ScrollFrame:GetWidth())
+    page.content:Show()
+    if page.header then page.header:Show() end
+
+    self.Content = page.content
+    self.currentHeader = page.header
+    self.ScrollFrame:SetScrollChild(page.content)
+    self.ScrollFrame:SetVerticalScroll(0)
+    self.ScrollFrame.ScrollBar:SetShown(panelName ~= "About")
+
+    Utils:VStack(self.TopPanel)
+
+    if not page.drawn then
+        page.drawn = true
+        self:SendMessage("GHOSTUI_PANEL_CHANGED", panelName)
+    end
 end
 
 -- Actualiza la UI cuando el addon se activa/desactiva globalmente
@@ -147,14 +189,16 @@ function MainFrame:UpdateUIVisuals(addonEnabled)
     if self.nav then
         Navbar:SetEnabled(self.nav, addonEnabled)
     end
-    if self.currentHeader then
-        self.currentHeader:SetEnabled(addonEnabled)
+    for _, p in pairs(self.pages or {}) do
+        if p.header then p.header:SetEnabled(addonEnabled) end
     end
 end
 
 -- Permite a los módulos registrar su cabecera para controlarla globalmente
 function MainFrame:RegisterHeader(headerFrame)
     self.currentHeader = headerFrame
+    local page = self.currentPanel and self.pages and self.pages[self.currentPanel]
+    if page then page.header = headerFrame end
     local addonEnabled = Database:GetGlobals().addonEnabled
     headerFrame:SetEnabled(addonEnabled)
 end
@@ -165,16 +209,22 @@ end
 
 function MainFrame:NotifyOnOpen()
     self.frame:SetScript("OnShow", function()
-        -- Al abrir, cargamos el panel por defecto (definido en el módulo Interface)
-        gUI:GetModule("Interface"):SetupInitialPanel()
+        if not self.currentPanel then
+            gUI:GetModule("Interface"):SetupInitialPanel()
+        end
     end)
 end
 
 function MainFrame:ClearAll()
-    -- Usamos el Utils:Clear que definimos para ocultar y liberar hijos
-    Utils:Clear(self.TopPanel)
-    Utils:Clear(self.Content)
-    
+    local page = self.currentPanel and self.pages and self.pages[self.currentPanel]
+    if page then
+        if page.header then
+            page.header:Hide()
+            page.header:SetParent(nil)
+            page.header = nil
+        end
+        Utils:Clear(page.content)
+    end
     self.currentHeader = nil
-    self:CreateNavBar() -- Re-creamos la navegación en el TopPanel limpio
+    Utils:VStack(self.TopPanel)
 end

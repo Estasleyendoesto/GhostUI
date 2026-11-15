@@ -78,11 +78,17 @@ function Chatbox:OnUpdate(dt)
     if not self.config or self.config.ignoreFrame then return end
 
     local isOver, hasFocus = self:CheckIfActive()
-    self.isMouseOver = isOver or hasFocus
+    local isActive = isOver or hasFocus
 
-    local target = self:GetTargetAlpha()
-    local duration = self:GetFadeDuration()
+    if isActive ~= self.isMouseOver then
+        self.isMouseOver = isActive
+        self:Refresh()
+    end
 
+    local target = self.targetAlpha
+    if target < 0 then return end
+
+    local duration = self.fadeDuration or 0.3
     for _, frame in ipairs(self.childFrames) do
         MagicFade:Step(frame, self:GetFrameTargetAlpha(frame, target, hasFocus), duration, dt)
     end
@@ -120,13 +126,15 @@ end
 
 function Chatbox:Refresh(instant)
     if not self.config or not self.globals then return end
-    
+
+    self.targetAlpha = self:GetTargetAlpha()
+    self.fadeDuration = self:GetFadeDuration()
+
     if instant then
-        local target = self:GetTargetAlpha()
         local _, hasFocus = self:CheckIfActive()
         for _, frame in ipairs(self.childFrames) do
             if frame then 
-                frame:SetAlpha(self:GetFrameTargetAlpha(frame, target, hasFocus)) 
+                frame:SetAlpha(self:GetFrameTargetAlpha(frame, self.targetAlpha, hasFocus)) 
             end
         end
     end

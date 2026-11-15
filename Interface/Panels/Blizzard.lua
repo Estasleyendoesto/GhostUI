@@ -35,12 +35,13 @@ end
 ---------------------------------------------------------------------
 
 function Blizzard:DrawHeader()
-    Header:Create(MainFrame.TopPanel, "Blizzard Frames", function()
+    local header = Header:Create(MainFrame.TopPanel, "Blizzard Frames", function()
         Popup:Confirm("Are you sure you want to reset every frame's settings?", function()
             Database:RestoreBlizzFrames()
             self:Draw()
         end)
     end)
+    MainFrame:RegisterHeader(header)
     Utils:VStack(MainFrame.TopPanel)
 end
 

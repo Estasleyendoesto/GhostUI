@@ -37,15 +37,17 @@ function ns.StatusTrackingBars:Create(name, isVirtual)
             if bOut then bOut:Stop() end
             
             -- Tras detener a Blizzard, restauramos nuestro alpha objetivo de inmediato
-            self.frame:SetAlpha(self:GetTargetAlpha())
+            if self.targetAlpha >= 0 then
+                self.frame:SetAlpha(self.targetAlpha)
+            end
         end
 
         -- 3. Corrección de Alpha (Failsafe)
         -- Si no hay un fundido de GhostUI activo, nos aseguramos de que el alpha sea el correcto
         if not self.frame.fadeInfo then
-            local target = self:GetTargetAlpha()
+            local target = self.targetAlpha
             
-            if math.abs(self.frame:GetAlpha() - target) > 0.01 then
+            if target >= 0 and math.abs(self.frame:GetAlpha() - target) > 0.01 then
                 self.frame:SetAlpha(target)
             end
         end

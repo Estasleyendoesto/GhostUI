@@ -47,7 +47,8 @@ function Scroll:Create(parent)
 
     -- Sincronización de ancho
     scrollFrame:SetScript("OnSizeChanged", function(self, width)
-        content:SetWidth(width)
+        local child = self:GetScrollChild()
+        if child then child:SetWidth(width) end
     end)
 
     scrollFrame:EnableMouseWheel(true)

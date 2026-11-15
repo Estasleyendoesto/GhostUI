@@ -52,8 +52,9 @@ function Navbar:Create(parent)
     
     Utils:RegisterLayout(nav, { padding = CFG.PADDING, spacing = CFG.SPACING })
     
-    nav.buttons   = {}
-    nav.isEnabled = true -- Estado inicial por defecto
+    nav.buttons       = {}
+    nav.buttonsByName = {}
+    nav.isEnabled     = true -- Estado inicial por defecto
     return nav
 end
 
@@ -68,6 +69,7 @@ function Navbar:AddButton(navbar, text, onClick, isActive)
     end)
 
     table.insert(navbar.buttons, btn)
+    navbar.buttonsByName[text] = btn
     if isActive then navbar.activeBtn = btn end
     
     RefreshButtonState(navbar, btn)
