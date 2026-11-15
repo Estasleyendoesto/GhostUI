@@ -29,7 +29,7 @@ function About:Draw()
 
     -- 3. Autoría (Configuración centrada)
     local authCfg = { centered = true, suffix = "", spacing = 10, xOffset = -18 }
-    Text:CreateDoubleLine(container, "Author", "Aeioux", authCfg)
+    Text:CreateDoubleLine(container, "Author", "EEsto", authCfg)
     Text:CreateDoubleLine(container, "Reign", "Sanguino (EU)", authCfg)
 
     -- Espaciador manual
@@ -38,9 +38,9 @@ function About:Draw()
 
     -- 4. Enlaces Oficiales
     local links = {
-        { "Wago.io:", "wago.io/gUI" },
-        { "CurseForge:", "curseforge.com/wow/addons/gUI" },
-        { "WoWInterface:", "wowinterface.com/downloads/infoXXXX" },
+        { "Wago.io:", "addons.wago.io/addons/ghostui" },
+        { "CurseForge:", "curseforge.com/wow/addons/ghostui" },
+        { "WoWInterface:", "wowinterface.com/downloads/info26734-GhostUI" },
         { "GitHub:", "github.com/Estasleyendoesto/GhostUI" }
     }
     
