@@ -52,6 +52,7 @@ Interface\Panels\Blizzard.lua
 Interface\Panels\Others.lua
 
 ## Events & Wrapper
+Frames\MagicFade.lua
 Frames\Wrapper.lua
 Events\Events.lua
 Events\Detectors\AFK.lua

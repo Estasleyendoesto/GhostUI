@@ -53,7 +53,7 @@ end
 -- Motor de Actualización (Ticker-ready)
 ---------------------------------------------------------------------
 
-function Wrapper:OnUpdate()
+function Wrapper:OnUpdate(dt)
     if not self.frame or not self.config or self.config.ignoreFrame then return end
 
     -- Sincronización de Mouseover
@@ -99,21 +99,23 @@ end
 -- Control Visual
 ---------------------------------------------------------------------
 
+function Wrapper:GetFadeDuration(targetAlpha, currentAlpha)
+    local data = self.config.isEnabled and self.config or self.globals
+    if self.isMouseOver then
+        return data.mouseoverFadeInDuration or 0.3
+    elseif not currentAlpha or targetAlpha < currentAlpha then
+        return data.mouseoverFadeOutDuration or 0.4
+    end
+    return 0.3
+end
+
 function Wrapper:Fade(targetAlpha)
     local currentAlpha = self.frame:GetAlpha()
     if currentAlpha == targetAlpha then return end
 
     self:StopFade()
 
-    local data = self.config.isEnabled and self.config or self.globals
-    
-    -- Definimos duración según el contexto (Mouseover > Fade Out > Default)
-    local duration = 0.3
-    if self.isMouseOver then
-        duration = data.mouseoverFadeInDuration or 0.3
-    elseif targetAlpha < currentAlpha then 
-        duration = data.mouseoverFadeOutDuration or 0.4
-    end
+    local duration = self:GetFadeDuration(targetAlpha, currentAlpha)
 
     UIFrameFade(self.frame, {
         mode = (targetAlpha > currentAlpha) and "IN" or "OUT",

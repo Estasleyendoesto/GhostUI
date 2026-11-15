@@ -1,15 +1,12 @@
 local _, ns = ...
 local Chatbox = gUI:NewModule("Chatbox", "AceHook-3.0")
 local Wrapper = gUI:GetModule("FrameWrapper")
+local MagicFade = gUI:GetModule("MagicFade")
 
 Chatbox.__index = Chatbox
 setmetatable(Chatbox, { __index = Wrapper })
 
 -- Configuración y Constantes
-local TICK_INTERVAL = 0.1
-local DEFAULT_FADE_IN = 0.3
-local DEFAULT_FADE_OUT = 0.4
-local ALPHA_THRESHOLD = 0.01
 local EDITBOX_MAX_ALPHA = 0.4 -- Techo de alpha en reposo/mouseover
 
 ---------------------------------------------------------------------
@@ -42,7 +39,6 @@ function Chatbox:Destroy()
     end
     self.childFrames = nil
     self.isMouseOver = nil
-    self.currentFocus = nil
 end
 
 ---------------------------------------------------------------------
@@ -78,20 +74,18 @@ end
 -- Lógica de Estado y Animación
 ---------------------------------------------------------------------
 
-function Chatbox:OnUpdate()
+function Chatbox:OnUpdate(dt)
     if not self.config or self.config.ignoreFrame then return end
 
     local isOver, hasFocus = self:CheckIfActive()
-    local isActive = isOver or hasFocus
+    self.isMouseOver = isOver or hasFocus
 
-    -- Si cambia el estado de actividad general, refrescamos configuración
-    if isActive ~= self.isMouseOver then
-        self.isMouseOver = isActive
-        self:Refresh()
+    local target = self:GetTargetAlpha()
+    local duration = self:GetFadeDuration()
+
+    for _, frame in ipairs(self.childFrames) do
+        MagicFade:Step(frame, self:GetFrameTargetAlpha(frame, target, hasFocus), duration, dt)
     end
-
-    self.currentFocus = hasFocus
-    self:UpdateAlphaTransition()
 end
 
 function Chatbox:CheckIfActive()
@@ -109,19 +103,6 @@ function Chatbox:CheckIfActive()
     return over, focus
 end
 
-function Chatbox:UpdateAlphaTransition()
-    local target = self:GetTargetAlpha()
-    local data = self.config.isEnabled and self.config or self.globals
-    
-    local duration = self.isMouseOver 
-        and (data.mouseoverFadeInDuration or DEFAULT_FADE_IN) 
-        or (data.mouseoverFadeOutDuration or DEFAULT_FADE_OUT)
-    
-    local step = TICK_INTERVAL / math.max(0.01, duration)
-
-    self:StepAlphaToTarget(target, step)
-end
-
 ---------------------------------------------------------------------
 -- Cálculo de Alpha y Normalización
 ---------------------------------------------------------------------
@@ -135,23 +116,6 @@ function Chatbox:GetFrameTargetAlpha(frame, globalTarget, hasFocus)
     end
 
     return globalTarget
-end
-
-function Chatbox:StepAlphaToTarget(target, step)
-    for _, frame in ipairs(self.childFrames) do
-        local frameTarget = self:GetFrameTargetAlpha(frame, target, self.currentFocus)
-        local current = frame:GetAlpha()
-        
-        if math.abs(current - frameTarget) > ALPHA_THRESHOLD then
-            local nextAlpha
-            if current < frameTarget then
-                nextAlpha = math.min(frameTarget, current + step)
-            else
-                nextAlpha = math.max(frameTarget, current - step)
-            end
-            frame:SetAlpha(nextAlpha)
-        end
-    end
 end
 
 function Chatbox:Refresh(instant)

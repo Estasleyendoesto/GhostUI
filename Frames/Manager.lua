@@ -131,6 +131,6 @@ end
 function Manager:UpdateAllFrames()
     if not ns.Frames then return end
     for _, wrapper in pairs(ns.Frames) do
-        wrapper:OnUpdate()
+        wrapper:OnUpdate(TIMER.interval)
     end
 end
