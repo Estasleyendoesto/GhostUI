@@ -135,8 +135,19 @@ function Collapsible:Create(parent, title, layout, onDelete)
         SetEnabledVisual(self.Header, isEnabled)
     end
 
+    function container:SetBuilder(onBuild)
+        self.onBuild = onBuild
+    end
+
     function container:Refresh(forceState)
-        Utils:VStack(self.Content)
+        local willExpand = (forceState ~= nil) and forceState or not self.Content:IsShown()
+        if willExpand then
+            if self.onBuild then
+                self.onBuild(self.Content)
+                self.onBuild = nil
+            end
+            Utils:VStack(self.Content)
+        end
         UpdateCollapsibleState(self, forceState)
     end
 

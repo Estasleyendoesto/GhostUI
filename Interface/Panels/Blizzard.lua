@@ -62,8 +62,10 @@ function Blizzard:DrawFrameList()
             co:SetStatus(frame.isEnabled)
             self.collapsibles[entry.name] = co
 
-            -- Renderizado dinámico de las opciones del frame
-            Builder:RenderSettings(co.Content, "frames", entry.name, {})
+            -- Renderizado diferido (lazy-load) al desplegar por primera vez
+            co:SetBuilder(function(content)
+                Builder:RenderSettings(content, "frames", entry.name, {})
+            end)
             co:Refresh(false)
         end
     end

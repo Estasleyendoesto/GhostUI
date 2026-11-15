@@ -110,7 +110,9 @@ function Others:DrawFrameList()
             self.collapsibles[frameName] = co
             table.insert(self.orderedList, co)
 
-            Builder:RenderSettings(co.Content, "frames", frameName, {})
+            co:SetBuilder(function(content)
+                Builder:RenderSettings(content, "frames", frameName, {})
+            end)
             co:Refresh(false)
         end
     end
