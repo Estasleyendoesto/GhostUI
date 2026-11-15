@@ -44,6 +44,9 @@ ns.FRAME_REGISTRY = {
     {name = "TargetFrame",                         alias = "Target"},
     {name = "FocusFrame",                          alias = "Focus"},
     {name = "PetFrame",                            alias = "Pet Frame"},
+    {name = "PartyFrame",                          alias = "Party Frame"},
+    {name = "CompactRaidFrameContainer",           alias = "Raid Frames"},
+    {name = "CompactRaidFrameManager",             alias = "Raid Manager"},
     -- Misc
     {name = "MinimapCluster",                      alias = "Minimap"},
     {name = "ObjectiveTrackerFrame",               alias = "Quests"},
@@ -56,7 +59,9 @@ ns.FRAME_REGISTRY = {
     {name = "MainStatusTrackingBarContainer",      alias = "Tracking Bar"},
     {name = "SecondaryStatusTrackingBarContainer", alias = "Secondary Tracking Bar"},
     {name = "StanceBar",                           alias = "Stance Bar"},
-    {name = "PartyFrame",                          alias = "Party Frame"},
+    {name = "DurabilityFrame",                     alias = "Durability"},
+    {name = "MirrorTimerContainer",                alias = "Breath"},
+    {name = "UIWidgetTopCenterContainerFrame",     alias = "Zone Tracker"},
     -- Spell Bars
     {name = "MainActionBar",                         alias = "Action Bar 1"},
     {name = "MultiBarBottomLeft",                  alias = "Action Bar 2"},
@@ -67,6 +72,7 @@ ns.FRAME_REGISTRY = {
     {name = "MultiBar6",                           alias = "Action Bar 7"},
     {name = "MultiBar7",                           alias = "Action Bar 8"},
     {name = "PetActionBar",                        alias = "Pet Action Bar"},
+    {name = "PossessActionBar",                    alias = "Possess Bar"},
     {name = "ZoneAbilityFrame",                    alias = "Zone Action Bar"},
 }
 
